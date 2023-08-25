@@ -1,0 +1,35 @@
+version : '3'
+
+services :
+  db :
+    container_name : 'chatkom-postgres'
+    ports:
+      - 54321:5432
+    environment :
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Tietee@1235
+    image : 'postgres:14.4'
+    restart : 'unless-stopped'
+  pgadmin :
+    container_name : 'chatkom-pgadmin'
+    ports:
+      - 8080:80
+    environment :
+      - PGADMIN_DEFAULT_EMAIL=tewro66@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=Tietee@1235
+    image : 'dpage/pgadmin4:latest'
+    restart : 'unless-stopped'
+  strapi :
+    container_name : 'chatkom-strapi'
+    ports:
+      - 1337:1337
+    environment :
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=192.168.1.46
+      - DATABASE_PORT=54321
+      - DATABASE_NAME=postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=Tietee@1235
+      - DATABASE_SSL=false
+    image : 'naskio/strapi:latest'
+    restart : 'unless-stopped'
